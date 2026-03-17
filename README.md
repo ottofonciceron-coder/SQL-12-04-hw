@@ -69,20 +69,18 @@ WHERE length > (SELECT AVG(length) FROM film);
 ```
 
 SELECT 
-    DATE_FORMAT(p.payment_date, '%Y-%m') AS month,
-    DATE_FORMAT(p.payment_date, '%M %Y') AS month_name,
-    SUM(p.amount) AS total_payments,
-    COUNT(DISTINCT p.rental_id) AS rentals_count,
-    COUNT(p.payment_id) AS payments_count,
-    ROUND(AVG(p.amount), 2) AS avg_payment
-FROM payment p
-GROUP BY month, month_name
+    DATE_FORMAT(payment_date, '%Y-%m') AS month_with_year,
+    DATE_FORMAT(payment_date, '%M %Y') AS full_month_name,
+    SUM(amount) AS total_payments,
+    COUNT(DISTINCT rental_id) AS rental_count
+FROM payment
+GROUP BY month_with_year, full_month_name
 ORDER BY total_payments DESC
 LIMIT 1;
 
 ```
 
-![zadanie2](https://github.com/ottofonciceron-coder/SQL-12-04-hw/blob/main/Zadanie%203.png)`
+![zadanie3](https://github.com/ottofonciceron-coder/SQL-12-04-hw/blob/main/Zadanie%203.png)`
 
 1. `Самый прибыльный месяц Июль 2005 года`
 2. `Общая сумма платежей: $28,368.91`
